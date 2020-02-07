@@ -1,0 +1,6 @@
+---
+projectName: payoutssdk
+language: python
+sourcePath: payoutssdk
+testPath: tests
+apiVersioning: false
