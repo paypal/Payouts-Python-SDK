@@ -1,0 +1,16 @@
+sudo: required
+dist: trusty
+addons:
+  apt:
+    packages:
+      - openssl
+language: python
+python:
+- '2.7'
+- '3.3'
+- '3.4'
+install:
+- pip install -r requirements.txt
+- openssl version -a
+script:
+- PAYPAL_CLIENT_ID=AdV4d6nLHabWLyemrw4BKdO9LjcnioNIOgoz7vD611ObbDUL0kJQfzrdhXEBwnH8QmV-7XZjvjRWn0kg PAYPAL_CLIENT_SECRET=EPKoPC_haZMTq5uM9WXuzoxUVdgzVqHyD5avCyVC1NCIUJeVaNNUZMnzduYIqrdw-carG9LBAizFGMyK nosetests --exe
