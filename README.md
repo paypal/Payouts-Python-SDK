@@ -164,4 +164,4 @@ Note: Update the `paypal_client.py` with your sandbox client credentials or pass
 
 
 ## License
-Code released under [SDK LICENSE](LICENSE)  
+Code released under [SDK LICENSE](LICENSE)
