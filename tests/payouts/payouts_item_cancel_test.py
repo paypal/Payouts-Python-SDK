@@ -3,7 +3,7 @@ import json
 import time
 from paypalpayoutssdk.payouts import PayoutsItemCancelRequest
 from tests.test_harness import TestHarness
-from payouts_item_get_test import getPayoutItem
+from tests.payouts.payouts_item_get_test import getPayoutItem
 
 class PayoutsItemCancelTest(TestHarness):
 

@@ -2,7 +2,7 @@ import unittest
 import json
 from paypalpayoutssdk.payouts import PayoutsGetRequest
 from tests.test_harness import TestHarness
-from payouts_post_test import createPayouts
+from tests.payouts.payouts_post_test import createPayouts
 
 class PayoutsGetTest(TestHarness):
 
