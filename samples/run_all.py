@@ -26,6 +26,10 @@ if create_response.status_code == 201:
                     if cancel_response.status_code == 200:
                         print(
                             'Successfully cancelled unclaimed payout item with id: ' + item_id)
+
+                        # Run cancel failure scenario
+                        print('Simulate failure on cancelling an already cancelled Payout item with id: ' + item_id)
+                        CancelPayoutItem().cancel_payout_item(item_id, True)
                     else:
                         print(
                             'Failed to cancel unclaimed payout item with id: ' + item_id)
@@ -37,3 +41,11 @@ if create_response.status_code == 201:
         print('Failed to retrieve Payouts batch with id: ' + batch_id)
 else:
     print('Failed to create Payouts batch')
+
+# Execute all failure cases
+print('Create a payout with validation failure')
+CreatePayouts().create_payouts_failure(True)
+print('Retrieving an invalid payout')
+GetPayouts().get_payouts("DUMMY", True)
+print('Retrieving an invalid payout item')
+GetPayoutItem().get_payout_item("DUMMY", True)

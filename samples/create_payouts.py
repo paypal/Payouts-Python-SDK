@@ -4,6 +4,8 @@ import string
 from paypal_client import PayPalClient
 from paypalpayoutssdk.payouts import PayoutsPostRequest
 from paypalhttp.serializers.json_serializer import Json
+from paypalhttp.http_error import HttpError
+from paypalhttp.encoder import Encoder
 
 class CreatePayouts(PayPalClient):
 
@@ -11,9 +13,10 @@ class CreatePayouts(PayPalClient):
     Calls the create batch api (POST - /v1/payments/payouts)
     A maximum of 15000 payout items are supported in a single batch request"""
     @staticmethod
-    def build_request_body():
+    def build_request_body(include_validation_failure = False):
         senderBatchId = str(''.join(random.sample(
             string.ascii_uppercase + string.digits, k=7)))
+        amount = "1.0.0" if include_validation_failure else "1.00"
         return \
             {
                 "sender_batch_header": {
@@ -24,42 +27,42 @@ class CreatePayouts(PayPalClient):
                     "email_subject": "This is a test transaction from SDK"
                 },
                 "items": [{
-                    "note": "Your 5$ Payout!",
+                    "note": "Your 1$ Payout!",
                     "amount": {
                         "currency": "USD",
-                        "value": "1.00"
+                        "value": amount
                     },
                     "receiver": "payout-sdk-1@paypal.com",
                     "sender_item_id": "Test_txn_1"
                 }, {
-                    "note": "Your 5$ Payout!",
+                    "note": "Your 1$ Payout!",
                     "amount": {
                         "currency": "USD",
-                        "value": "1.00"
+                        "value": amount
                     },
                     "receiver": "payout-sdk-2@paypal.com",
                     "sender_item_id": "Test_txn_2"
                 }, {
-                    "note": "Your 5$ Payout!",
+                    "note": "Your 1$ Payout!",
                     "amount": {
                         "currency": "USD",
-                        "value": "1.00"
+                        "value": amount
                     },
                     "receiver": "payout-sdk-3@paypal.com",
                     "sender_item_id": "Test_txn_3"
                 }, {
-                    "note": "Your 5$ Payout!",
+                    "note": "Your 1$ Payout!",
                     "amount": {
                         "currency": "USD",
-                        "value": "1.00"
+                        "value": amount
                     },
                     "receiver": "payout-sdk-4@paypal.com",
                     "sender_item_id": "Test_txn_4"
                 }, {
-                    "note": "Your 5$ Payout!",
+                    "note": "Your 1$ Payout!",
                     "amount": {
                         "currency": "USD",
-                        "value": "1.00"
+                        "value": amount
                     },
                     "receiver": "payout-sdk-5@paypal.com",
                     "sender_item_id": "Test_txn_5"
@@ -68,7 +71,7 @@ class CreatePayouts(PayPalClient):
 
     def create_payouts(self, debug=False):
         request = PayoutsPostRequest()
-        request.request_body(self.build_request_body())
+        request.request_body(self.build_request_body(False))
         response = self.client.execute(request)
 
         if debug:
@@ -88,8 +91,36 @@ class CreatePayouts(PayPalClient):
         
         return response
 
+    
+    def create_payouts_failure(self, debug=False):
+        request = PayoutsPostRequest()
+        request.request_body(self.build_request_body(True))
+
+        try:
+            response = self.client.execute(request)
+        except HttpError as httpe:
+            if debug:
+                # Handle server side API failure
+                encoder = Encoder([Json()])
+                error = encoder.deserialize_response(httpe.message, httpe.headers)
+                print("Error: " + error["name"])
+                print("Error message: " + error["message"])
+                print("Information link: " + error["information_link"])
+                print("Debug id: " + error["debug_id"])
+                print("Details: ")
+                for detail in error["details"]:
+                    print("Error location: " + detail["location"])
+                    print("Error field: " + detail["field"])
+                    print("Error issue: " + detail["issue"])
+
+        except IOError as ioe:
+            #Handle cient side connection failures
+            print(ioe.message)
+            
 
 """This is the driver function which invokes the create_payouts function to create
    a Payouts Batch."""
 if __name__ == "__main__":
     CreatePayouts().create_payouts(debug=True)
+    #Simulate failure in create payload to showcase validation failure and how to parse the reason for failure
+    CreatePayouts().create_payouts_failure(debug=True)

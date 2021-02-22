@@ -51,7 +51,7 @@ from paypalpayoutssdk.payouts import PayoutsPostRequest
 from paypalhttp import HttpError
 
 # Construct a request object and set desired parameters
-# Here, PayoutsPostRequest()() creates a POST request to /v1/payments/payouts
+# Here, PayoutsPostRequest() creates a POST request to /v1/payments/payouts
 body = {
     "sender_batch_header": {
         "recipient_type": "EMAIL",
@@ -61,7 +61,7 @@ body = {
         "email_subject": "This is a test transaction from SDK"
     },
     "items": [{
-        "note": "Your 5$ Payout!",
+        "note": "Your 1$ Payout!",
         "amount": {
             "currency": "USD",
             "value": "1.00"
@@ -69,7 +69,7 @@ body = {
         "receiver": "payout-sdk-1@paypal.com",
         "sender_item_id": "Test_txn_1"
     }, {
-        "note": "Your 5$ Payout!",
+        "note": "Your 1$ Payout!",
         "amount": {
             "currency": "USD",
             "value": "1.00"
@@ -77,7 +77,7 @@ body = {
         "receiver": "payout-sdk-2@paypal.com",
         "sender_item_id": "Test_txn_2"
     }, {
-        "note": "Your 5$ Payout!",
+        "note": "Your 1$ Payout!",
         "amount": {
             "currency": "USD",
             "value": "1.00"
@@ -85,7 +85,7 @@ body = {
         "receiver": "payout-sdk-3@paypal.com",
         "sender_item_id": "Test_txn_3"
     }, {
-        "note": "Your 5$ Payout!",
+        "note": "Your 1$ Payout!",
         "amount": {
             "currency": "USD",
             "value": "1.00"
@@ -93,7 +93,7 @@ body = {
         "receiver": "payout-sdk-4@paypal.com",
         "sender_item_id": "Test_txn_4"
     }, {
-        "note": "Your 5$ Payout!",
+        "note": "Your 1$ Payout!",
         "amount": {
             "currency": "USD",
             "value": "1.00"
@@ -104,7 +104,7 @@ body = {
 }
 
 request = PayoutsPostRequest()
-request.request_body (body)
+request.request_body(body)
 
 try:
     # Call API with your client and get a response for your call
@@ -117,6 +117,97 @@ except IOError as ioe:
     if isinstance(ioe, HttpError):
         # Something went wrong server-side
         print ioe.status_code
+```
+
+### Handle API Failure
+This will create a Payout with validation failure to showcase how to parse the failed response entity. Refer samples for more scenarios
+#### Code:
+```python
+from paypalpayoutssdk.payouts import PayoutsPostRequest
+from paypalhttp import HttpError
+from paypalhttp.encoder import Encoder
+from paypalhttp.serializers.json_serializer import Json
+
+# Construct a request object and set desired parameters
+# Here, PayoutsPostRequest() creates a POST request to /v1/payments/payouts
+body = {
+    "sender_batch_header": {
+        "recipient_type": "EMAIL",
+        "email_message": "SDK payouts test txn",
+        "note": "Enjoy your Payout!!",
+        "sender_batch_id": "Test_SDK_1",
+        "email_subject": "This is a test transaction from SDK"
+    },
+    "items": [{
+        "note": "Your 1$ Payout!",
+        "amount": {
+            "currency": "USD",
+            "value": "1.0.0"
+        },
+        "receiver": "payout-sdk-1@paypal.com",
+        "sender_item_id": "Test_txn_1"
+    }, {
+        "note": "Your 1$ Payout!",
+        "amount": {
+            "currency": "USD",
+            "value": "1.0.0"
+        },
+        "receiver": "payout-sdk-2@paypal.com",
+        "sender_item_id": "Test_txn_2"
+    }, {
+        "note": "Your 1$ Payout!",
+        "amount": {
+            "currency": "USD",
+            "value": "1.0.0"
+        },
+        "receiver": "payout-sdk-3@paypal.com",
+        "sender_item_id": "Test_txn_3"
+    }, {
+        "note": "Your 1$ Payout!",
+        "amount": {
+            "currency": "USD",
+            "value": "1.0.0"
+        },
+        "receiver": "payout-sdk-4@paypal.com",
+        "sender_item_id": "Test_txn_4"
+    }, {
+        "note": "Your 1$ Payout!",
+        "amount": {
+            "currency": "USD",
+            "value": "1.0.0"
+        },
+        "receiver": "payout-sdk-5@paypal.com",
+        "sender_item_id": "Test_txn_5"
+    }]
+}
+
+request = PayoutsPostRequest()
+request.request_body(body)
+
+try:
+    # Call API with your client and get a response for your call
+    response = client.execute(request)
+    # If call returns body in response, you can get the deserialized version from the result attribute of the response
+    batch_id = response.result.batch_header.payout_batch_id
+    print batch_id
+    
+except HttpError as httpe:
+        # Handle server side API failure
+        encoder = Encoder([Json()])
+        error = encoder.deserialize_response(httpe.message, httpe.headers)
+        print("Error: " + error["name"])
+        print("Error message: " + error["message"])
+        print("Information link: " + error["information_link"])
+        print("Debug id: " + error["debug_id"])
+        print("Details: ")
+        for detail in error["details"]:
+            print("Error location: " + detail["location"])
+            print("Error field: " + detail["field"])
+            print("Error issue: " + detail["issue"])
+
+except IOError as ioe:
+    #Handle cient side connection failures
+    print(ioe.message)
 ```
 
 ### Retrieve a Payout Batch
