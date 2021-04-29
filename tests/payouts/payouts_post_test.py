@@ -10,8 +10,11 @@ class PayoutsPostTest(TestHarness):
 
     def testCreatePayouts(self):
         response = createPayouts(self.client)
-        sys.stdout.write(repr(response))  # same as print
-        sys.stdout.flush()
+        #sys.stdout.write('----POST PAYOUT RESPONSE----')
+        #sys.stdout.write(repr(response.status_code))
+        #sys.stdout.write(repr(response))  # same as print
+        #sys.stdout.write('----POST PAYOUT RESPONSE----')
+        #sys.stdout.flush()
         self.assertEqual(201, response.status_code)
         self.assertIsNotNone(response.result)
 

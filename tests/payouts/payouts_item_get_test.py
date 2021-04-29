@@ -9,9 +9,10 @@ class PayoutsItemGetTest(TestHarness):
 
     def testPayoutsItemGetTest(self):
         response = getPayoutItem(self.client)
-        print("--- Item Get Test --- ")
-        print(response.status_code)
-        print("--- Item Get Test --- ")
+        sys.stdout.write('--- Item Get Test --- ')
+        sys.stdout.write(repr(response.status_code))
+        sys.stdout.write('--- Item Get Test --- ')
+        sys.stdout.flush()
         self.assertEqual(200, response.status_code)
         self.assertIsNotNone(response.result)
 
@@ -27,7 +28,6 @@ class PayoutsItemGetTest(TestHarness):
 
 def getPayoutItem(client):
     get_response = getPayouts(client)
-
     request = PayoutsItemGetRequest(get_response.result.items[0].payout_item_id)
     return client.execute(request)
 

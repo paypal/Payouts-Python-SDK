@@ -9,11 +9,11 @@ class PayoutsItemCancelTest(TestHarness):
 
     def testPayoutsItemCancelTest(self):
         response = getPayoutItem(self.client)
-        print(response)
         time.sleep(20)
 
         request = PayoutsItemCancelRequest(response.result.payout_item_id)
         response = self.client.execute(request)
+
         self.assertEqual(200, response.status_code)
         self.assertIsNotNone(response.result)
 
@@ -28,7 +28,7 @@ class PayoutsItemCancelTest(TestHarness):
         self.assertEquals("Test_txn_1", response.result.payout_item.sender_item_id)
         self.assertEquals("payout-sdk-1@paypal.com", response.result.payout_item.receiver)
 
-        #print(json.dumps(response.result.__str__, indent=2))
+        print(json.dumps(response.result.__str__, indent=2))
 
 
     # Add your own checks here
