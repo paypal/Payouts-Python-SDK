@@ -28,8 +28,9 @@ class PayoutsPostRequest:
     def pay_pal_request_id(self, pay_pal_request_id):
         self.headers["PayPal-Request-Id"] = str(pay_pal_request_id)
 
-    
-    
+
+
     def request_body(self, create_payout_request):
         self.body = create_payout_request
+        print(self)
         return self
