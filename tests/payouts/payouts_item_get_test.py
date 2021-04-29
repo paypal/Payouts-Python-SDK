@@ -9,7 +9,9 @@ class PayoutsItemGetTest(TestHarness):
 
     def testPayoutsItemGetTest(self):
         response = getPayoutItem(self.client)
-        print(response)
+        print("--- Item Get Test --- ")
+        print(response.status_code)
+        print("--- Item Get Test --- ")
         self.assertEqual(200, response.status_code)
         self.assertIsNotNone(response.result)
 
