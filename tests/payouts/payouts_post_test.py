@@ -2,6 +2,7 @@ import unittest
 import json
 import string
 import random
+import sys
 from paypalpayoutssdk.payouts import PayoutsPostRequest
 from tests import TestHarness
 
@@ -9,7 +10,8 @@ class PayoutsPostTest(TestHarness):
 
     def testCreatePayouts(self):
         response = createPayouts(self.client)
-        print(response)
+        sys.stdout.write(response)  # same as print
+        sys.stdout.flush()
         self.assertEqual(201, response.status_code)
         self.assertIsNotNone(response.result)
 
