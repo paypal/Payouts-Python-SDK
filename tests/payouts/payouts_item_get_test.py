@@ -1,6 +1,6 @@
 import unittest
 import json
-import io
+import sys
 from paypalpayoutssdk.payouts import PayoutsItemGetRequest
 from tests.test_harness import TestHarness
 from tests.payouts.payouts_get_test import getPayouts
