@@ -9,6 +9,7 @@ class PayoutsItemCancelTest(TestHarness):
 
     def testPayoutsItemCancelTest(self):
         response = getPayoutItem(self.client)
+        print(response)
         time.sleep(20)
 
         request = PayoutsItemCancelRequest(response.result.payout_item_id)

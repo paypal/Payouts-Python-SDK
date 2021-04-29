@@ -8,6 +8,7 @@ class PayoutsGetTest(TestHarness):
 
     def testPayoutsGetTest(self):
         response = getPayouts(self.client)
+        print(response)
         self.assertEqual(200, response.status_code)
         self.assertIsNotNone(response.result)
 
