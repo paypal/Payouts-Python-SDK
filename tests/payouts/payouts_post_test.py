@@ -12,6 +12,7 @@ class PayoutsPostTest(TestHarness):
 
         print('PayoutsPostTest')
         print(response)
+        sys.stdout.flush()
 
         self.assertEqual(201, response.status_code)
         self.assertIsNotNone(response.result)
