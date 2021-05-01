@@ -11,7 +11,7 @@ class PayoutsPostTest(TestHarness):
         response = createPayouts(self.client)
 
         sys.stdout.write('PayoutsPostTest')
-        sys.stdout.write(response)
+        sys.stdout.write(response.read().decode('utf-8'))
         sys.stdout.flush()
 
         self.assertEqual(201, response.status_code)
