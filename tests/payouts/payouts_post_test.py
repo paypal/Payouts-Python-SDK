@@ -4,6 +4,7 @@ import string
 import random
 import sys
 from paypalpayoutssdk.payouts import PayoutsPostRequest
+from __future__ import print_function
 from tests import TestHarness
 
 class PayoutsPostTest(TestHarness):
