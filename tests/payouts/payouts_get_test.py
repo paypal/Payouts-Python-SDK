@@ -16,7 +16,7 @@ class PayoutsGetTest(TestHarness):
         sys.stdout.write(response.result.links)
         sys.stdout.flush()
 
-        self.assertEqual(200, response.status_code)
+        self.assertEqual(2001, response.status_code)
         self.assertIsNotNone(response.result)
 
         self.assertIsNotNone(response.result.batch_header.payout_batch_id)
