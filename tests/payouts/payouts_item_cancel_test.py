@@ -16,7 +16,6 @@ class PayoutsItemCancelTest(TestHarness):
         response = self.client.execute(request)
 
         sys.stdout.write('PayoutsPostTest')
-        sys.stdout.write(response.headers)
         sys.stdout.write(response.status_code)
         sys.stdout.write(response.result)
         sys.stdout.write(response.result.links)

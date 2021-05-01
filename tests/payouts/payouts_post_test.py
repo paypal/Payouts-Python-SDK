@@ -11,7 +11,6 @@ class PayoutsPostTest(TestHarness):
         response = createPayouts(self.client)
 
         sys.stdout.write('PayoutsPostTest')
-        sys.stdout.write(response.headers)
         sys.stdout.write(response.status_code)
         sys.stdout.write(response.result)
         sys.stdout.write(response.result.links)
