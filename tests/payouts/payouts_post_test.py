@@ -12,7 +12,6 @@ class PayoutsPostTest(TestHarness):
 
         sys.stdout.write('PayoutsPostTest')
         sys.stdout.write(response.headers)
-        sys.stdout.write(response.status)
         sys.stdout.write(response.body)
         sys.stdout.flush()
 
