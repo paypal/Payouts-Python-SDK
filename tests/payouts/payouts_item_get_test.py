@@ -1,5 +1,6 @@
 import unittest
 import json
+import sys
 from paypalpayoutssdk.payouts import PayoutsItemGetRequest
 from tests.test_harness import TestHarness
 from tests.payouts.payouts_get_test import getPayouts
@@ -8,6 +9,12 @@ class PayoutsItemGetTest(TestHarness):
 
     def testPayoutsItemGetTest(self):
         response = getPayoutItem(self.client)
+
+        sys.stdout.write('PayoutsPostTest')
+        sys.stdout.write(response.status_code)
+        sys.stdout.write(response.result)
+        sys.stdout.write(response.result.links)
+        sys.stdout.flush()
 
         self.assertEqual(200, response.status_code)
         self.assertIsNotNone(response.result)

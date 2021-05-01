@@ -2,13 +2,19 @@ import unittest
 import json
 import string
 import random
+import sys
 from paypalpayoutssdk.payouts import PayoutsPostRequest
 from tests import TestHarness
-
 class PayoutsPostTest(TestHarness):
 
     def testCreatePayouts(self):
         response = createPayouts(self.client)
+
+        sys.stdout.write('PayoutsPostTest')
+        sys.stdout.write(response.status_code)
+        sys.stdout.write(response.result)
+        sys.stdout.write(response.result.links)
+        sys.stdout.flush()
 
         self.assertEqual(201, response.status_code)
         self.assertIsNotNone(response.result)
