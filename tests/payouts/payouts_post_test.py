@@ -12,7 +12,9 @@ class PayoutsPostTest(TestHarness):
 
         sys.stdout.write('PayoutsPostTest')
         sys.stdout.write(response.headers)
-        sys.stdout.write(response.content)
+        sys.stdout.write(response.status_code)
+        sys.stdout.write(response.result)
+        sys.stdout.write(response.result.links)
         sys.stdout.flush()
 
         self.assertEqual(201, response.status_code)

@@ -13,6 +13,14 @@ class PayoutsItemCancelTest(TestHarness):
 
         request = PayoutsItemCancelRequest(response.result.payout_item_id)
         response = self.client.execute(request)
+
+        sys.stdout.write('PayoutsPostTest')
+        sys.stdout.write(response.headers)
+        sys.stdout.write(response.status_code)
+        sys.stdout.write(response.result)
+        sys.stdout.write(response.result.links)
+        sys.stdout.flush()
+
         self.assertEqual(200, response.status_code)
         self.assertIsNotNone(response.result)
 
