@@ -1,4 +1,3 @@
-from __future__ import print_function
 import unittest
 import json
 import string
@@ -6,14 +5,13 @@ import random
 import sys
 from paypalpayoutssdk.payouts import PayoutsPostRequest
 from tests import TestHarness
-
 class PayoutsPostTest(TestHarness):
 
     def testCreatePayouts(self):
         response = createPayouts(self.client)
 
-        print('PayoutsPostTest')
-        print(response)
+        sys.stdout.write('PayoutsPostTest')
+        sys.stdout.write(response)
         sys.stdout.flush()
 
         self.assertEqual(201, response.status_code)
