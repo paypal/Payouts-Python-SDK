@@ -6,7 +6,7 @@ __Welcome to PayPal Python SDK__. This repository contains PayPal's Python SDK a
 
 This is a part of the next major PayPal SDK. It includes a simplified interface to only provide simple model objects and blueprints for HTTP calls. This repo currently contains functionality for PayPal Payouts APIs which includes [Payouts](https://developer.paypal.com/docs/api/payments.payouts-batch/v1/).
 
-Please refer to the [PayPal Payouts Integration Guide](https://developer.paypal.com/docs/payouts/) for more information. Also refer to [Setup your SDK](https://developer.paypal.com/docs/payouts/reference/setup-sdk) for additional information about setting up the SDK's.
+Please refer to the [PayPal Payouts Integration Guide](https://developer.paypal.com/docs/payouts/) for more information. Also refer to [Setup your SDK](https://developer.paypal.com/docs/payouts/standard/reference/sdk/#link-install) for additional information about setting up the SDK's.
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ PayPalHttp can be found at https://pypi.org/project/paypalhttp/
 
 ### Binaries
 
-It is not mandatory to fork this repository for using the PayPal SDK. You can refer [PayPal Payouts SDK](https://developer.paypal.com/docs/payouts/reference/setup-sdk/#install-the-sdk) for configuring and working with SDK without forking this code.
+It is not mandatory to fork this repository for using the PayPal SDK. You can refer [PayPal Payouts SDK](https://developer.paypal.com/docs/payouts/standard/reference/sdk/#link-install) for configuring and working with SDK without forking this code.
 
 For contributing or referring the samples, You can fork/refer this repository. 
 
