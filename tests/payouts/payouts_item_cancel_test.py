@@ -1,6 +1,7 @@
 import unittest
 import json
 import time
+import sys
 from paypalpayoutssdk.payouts import PayoutsItemCancelRequest
 from tests.test_harness import TestHarness
 from tests.payouts.payouts_item_get_test import getPayoutItem
@@ -13,6 +14,13 @@ class PayoutsItemCancelTest(TestHarness):
 
         request = PayoutsItemCancelRequest(response.result.payout_item_id)
         response = self.client.execute(request)
+
+        sys.stdout.write('PayoutsPostTest')
+        sys.stdout.write(response.status_code)
+        sys.stdout.write(response.result)
+        sys.stdout.write(response.result.links)
+        sys.stdout.flush()
+
         self.assertEqual(200, response.status_code)
         self.assertIsNotNone(response.result)
 
